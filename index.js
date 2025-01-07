@@ -5,15 +5,15 @@ checkBtnEl.addEventListener("click", () => {
     const baseInicial = document.getElementById('baseInicial').value;
     const baseFinal = document.getElementById('baseFinal').value;
     const guessEl = document.querySelector(".guess");//texto que aparecera como resultado
-    
+    let baseDiez = 0; //esta el numero incial en base 10
     //comprueba que la base si existe
     if (baseInicial < 2  || baseFinal < 2){
         guessEl.textContent = "La base tiene que ser mayor a 2"
         return;
     } 
 
-    if(((baseInicial*10)%10 != 0) || ((baseInicial*10)%10 != 0)){
-        guessEl.textContent = "Solo se pueden ingresar numeros enteros"
+    if (!Number.isInteger(Number(baseInicial)) || !Number.isInteger(Number(baseFinal))) {
+        guessEl.textContent = "Solo se pueden ingresar números enteros";
         return;
     }
     
@@ -25,13 +25,13 @@ checkBtnEl.addEventListener("click", () => {
     //El siguient arraylist no hace nada, es constante, 
     //compara letras en base a su numero ascii y devuelve un numero al que seria en una base mayor a 10
     let comparacionNum = [];
-    for (let i = 65, j=11; i < 91; i++) {
+    for (let i = 65, j=10; i < 91; i++) {
     comparacionNum[i] = j;
     ++j;
     }
 
     //comprueba que el texto dado son solo letras y numeros y luego los añade a un array
-   for(i=0; i < numInicial.length; ++i){
+   for(let i=0;  i < numInicial.length; ++i){
     if(!Number.isNaN(Number(myArr[i]))){
         arregloNum[i] = Number(myArr[i]);
     }else if((myArr[i].charCodeAt(0) > 64) && (myArr[i].charCodeAt(0) < 91)){
@@ -42,12 +42,18 @@ checkBtnEl.addEventListener("click", () => {
     }
    }
     //comprueba que el numero si corresponda a la base dada
-   for(i=0; i < numInicial.length; ++i){
+   for(let i=0; i < numInicial.length; ++i){
         if(arregloNum[i] >= baseInicial){
             guessEl.textContent = "El numero no corresponde a la base dada";
             return;
         }
     }
 
-   guessEl.textContent = arregloNum.toString();
+    //cambio a base 10
+    for(let i=0,  n = arregloNum.length; i < n; ++i){
+        baseDiez = baseDiez + (arregloNum[i])*( baseInicial**(n-i-1));
+    }
+
+
+   guessEl.textContent = baseDiez.toString();
 });
