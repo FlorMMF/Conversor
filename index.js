@@ -1,5 +1,33 @@
 const checkBtnEl = document.querySelector("button");
 
+const abecedario = [];
+abecedario[10] = 'A';
+abecedario[11] = 'B';
+abecedario[12] = 'C';
+abecedario[13] = 'D';
+abecedario[14] = 'E';
+abecedario[15] = 'F';
+abecedario[16] = 'G';
+abecedario[17] = 'H';
+abecedario[18] = 'I';
+abecedario[19] = 'J';
+abecedario[20] = 'K';
+abecedario[21] = 'L';
+abecedario[22] = 'M';
+abecedario[23] = 'N';
+abecedario[24] = 'O';
+abecedario[25] = 'P';
+abecedario[26] = 'Q';
+abecedario[27] = 'R';
+abecedario[28] = 'S';
+abecedario[29] = 'T';
+abecedario[30] = 'U';
+abecedario[31] = 'V';
+abecedario[32] = 'W';
+abecedario[33] = 'X';
+abecedario[34] = 'Y';
+abecedario[35] = 'Z';
+
 checkBtnEl.addEventListener("click", () => {
     const numPrimero = document.getElementById('numInicial').value;
     const baseInicial = document.getElementById('baseInicial').value;
@@ -67,10 +95,15 @@ checkBtnEl.addEventListener("click", () => {
     }while(multiplo > baseFinal);
     residuo = baseDiez%baseFinal;
     resultado.push(residuo);
-   
+   //se escribe al revez
     let escribir = '';
     for(let i=0; i < resultado.length; ++i){
-        escribir = escribir.concat(resultado[resultado.length-i-1]);
+        if((resultado[resultado.length-i-1])>9){
+            escribir = escribir.concat(abecedario[resultado[resultado.length-i-1]]);
+        }else{
+            escribir = escribir.concat(resultado[resultado.length-i-1]);
+        }
+        
     }
     
    guessEl.textContent = escribir;
