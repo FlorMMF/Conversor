@@ -54,6 +54,24 @@ checkBtnEl.addEventListener("click", () => {
         baseDiez = baseDiez + (arregloNum[i])*( baseInicial**(n-i-1));
     }
 
-
-   guessEl.textContent = baseDiez.toString();
+    let residuo = 0;
+    let multiplo = 0;
+    let resultado = [];
+    //cambio a la base final
+    do{
+        multiplo = parseInt(baseDiez/baseFinal);
+        residuo = baseDiez%baseFinal;
+        resultado.push(residuo);
+        baseDiez = multiplo;
+        
+    }while(multiplo > baseFinal);
+    residuo = baseDiez%baseFinal;
+    resultado.push(residuo);
+   
+    let escribir = '';
+    for(let i=0; i < resultado.length; ++i){
+        escribir = escribir.concat(resultado[resultado.length-i-1]);
+    }
+    
+   guessEl.textContent = escribir;
 });
