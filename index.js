@@ -4,8 +4,20 @@ checkBtnEl.addEventListener("click", () => {
     const numPrimero = document.getElementById('numInicial').value;
     const baseInicial = document.getElementById('baseInicial').value;
     const baseFinal = document.getElementById('baseFinal').value;
-    
     const guessEl = document.querySelector(".guess");//texto que aparecera como resultado
+    
+    //comprueba que la base si existe
+    if (baseInicial < 2  || baseFinal < 2){
+        guessEl.textContent = "La base tiene que ser mayor a 2"
+        return;
+    } 
+
+    if(((baseInicial*10)%10 != 0) || ((baseInicial*10)%10 != 0)){
+        guessEl.textContent = "Solo se pueden ingresar numeros enteros"
+        return;
+    }
+    
+    
     let numInicial = numPrimero.replace(/ /g, '');//remplaza todos los espacios en el texto por vacio
     numInicial = numInicial.toUpperCase();
     const myArr = numInicial.split("");//pone cada caracter en un espacio del arraylist
@@ -18,7 +30,7 @@ checkBtnEl.addEventListener("click", () => {
     ++j;
     }
 
-
+    //comprueba que el texto dado son solo letras y numeros y luego los añade a un array
    for(i=0; i < numInicial.length; ++i){
     if(!Number.isNaN(Number(myArr[i]))){
         arregloNum[i] = Number(myArr[i]);
@@ -29,6 +41,13 @@ checkBtnEl.addEventListener("click", () => {
         return;
     }
    }
+    //comprueba que el numero si corresponda a la base dada
+   for(i=0; i < numInicial.length; ++i){
+        if(arregloNum[i] >= baseInicial){
+            guessEl.textContent = "El numero no corresponde a la base dada";
+            return;
+        }
+    }
 
    guessEl.textContent = arregloNum.toString();
 });
