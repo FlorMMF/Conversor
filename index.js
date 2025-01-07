@@ -35,8 +35,8 @@ checkBtnEl.addEventListener("click", () => {
     const guessEl = document.querySelector(".guess");//texto que aparecera como resultado
     let baseDiez = 0; //esta el numero incial en base 10
     //comprueba que la base si existe
-    if (baseInicial < 2  || baseFinal < 2){
-        guessEl.textContent = "La base tiene que ser mayor a 2"
+    if (baseInicial < 2  || baseFinal < 2 || baseInicial  > 36 || baseFinal > 36){
+        guessEl.textContent = "La base tiene que ser mayor a 2 y menor que 37";
         return;
     } 
 
